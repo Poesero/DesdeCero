@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <button type="button" routerLink="/inicio">Atras</button>
+  </div>
+</nav>
+
+<style>
+  table.table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+</style>
+<body style="background-color: rgb(73, 114, 119)">
+  <h2 class="mb-4">Posts</h2>
+  <table class="table table-striped">
+    <thead class="thead bg-primarytext-white">
+      <tr>
+        <th scope="col">Text</th>
+        <th scope="col">Id</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of postList">
+        <td>
+          {{ post.id }}
+        </td>
+        <td>
+          {{ post.text }}
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="borrar(post.id)">
+            Delete
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" onclick="view(post)">
+            View
+          </button>
+        </td>
+      </tr>
+      <td>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="text"
+          [(ngModel)]="text"
+        />
+      </td>
+      <td>
+        <select formControlName="user" class="form-control">
+          <option *ngFor="let user of userList" [value]="user">
+            {{ user.userName }}
+          </option>
+        </select>
+      </td>
+    </tbody>
+    <tfoot></tfoot>
+    <td>
+      <button class="btn btn-danger btn-sm" onclick="addPost()">Add</button>
+    </td>
+    <td><button>Delete</button></td>
+  </table>
+
+  <ng-template #ver let-modal>
+    <input class="form-control" [(ngModel)]="usrId" readonly />
+    <input class="form-control" [(ngModel)]="text" ngbAutofocus />
+    <button (click)="modal.close()">Guardar</button>
+  </ng-template>
+</body>
